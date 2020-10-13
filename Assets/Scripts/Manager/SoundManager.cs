@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -459,5 +460,11 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
         FadeOut(0.5f, Interpolate.EaseType.Linear);
         currentPlayingType = MusicPlayingType.None;
         StopAllCoroutines();
+    }
+
+    public void PlayShotSound(string classID, Vector3 position, float volume)
+    {
+        SoundList sound = (SoundList)Enum.Parse(typeof(SoundList), classID.ToLower());
+        PlayOneShotEffect((int)sound, position, volume);
     }
 }
