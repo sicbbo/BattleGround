@@ -8,7 +8,7 @@ public class PatrolAction : Action
     public override void OnReadyAction(StateController controller)
     {
         controller.enemyAnimation.AbortPendingAim();
-        controller.enemyAnimation.animator.SetBool(AnimatorKey.Crouch, false);
+        controller.enemyAnimation.anim.SetBool(AnimatorKey.Crouch, false);
         controller.personalTarget = Vector3.positiveInfinity;
         controller.CoverSpot = Vector3.positiveInfinity;
     }

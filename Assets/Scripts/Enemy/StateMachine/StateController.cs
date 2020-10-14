@@ -9,7 +9,7 @@ public class StateController : MonoBehaviour
     public ClassStats statData;
     public string classID;
 
-    private ClassStats.Param classStats;
+    private ClassStats.Param classStats = null;
     public ClassStats.Param ClassStats
     {
         get
@@ -77,7 +77,7 @@ public class StateController : MonoBehaviour
         get { return strafing; }
         set
         {
-            enemyAnimation.animator.SetBool("Strafe", value);
+            enemyAnimation.anim.SetBool("Strafe", value);
             strafing = value;
         }
     }
@@ -89,7 +89,7 @@ public class StateController : MonoBehaviour
         {
             if (aiming != value)
             {
-                enemyAnimation.animator.SetBool("Aim", value);
+                enemyAnimation.anim.SetBool("Aim", value);
                 aiming = value;
             }
         }

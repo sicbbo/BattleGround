@@ -13,8 +13,8 @@ public class AttackAction : Action
         controller.variables.shotsInRounds = Random.Range(controller.maximumBurst / 2, controller.maximumBurst);
         controller.variables.currentShots = 0;
         controller.variables.startShootTimer = 0f;
-        controller.enemyAnimation.animator.ResetTrigger(AnimatorKey.Shooting);
-        controller.enemyAnimation.animator.SetBool(AnimatorKey.Crouch, false);
+        controller.enemyAnimation.anim.ResetTrigger(AnimatorKey.Shooting);
+        controller.enemyAnimation.anim.SetBool(AnimatorKey.Crouch, false);
         controller.variables.waitInCoverTime = 0f;
         controller.enemyAnimation.ActivatePendingAim();
     }
@@ -75,8 +75,8 @@ public class AttackAction : Action
 
     private bool CanShot(StateController controller)
     {
-        float distance = (controller.personalTarget - controller.enemyAnimation.gunMuzzle.position).sqrMagnitude;
-        if (controller.Aiming && (controller.enemyAnimation.currentAimingAngleGap < aimAngleGap || distance < 5.0f))
+        float distance = (controller.personalTarget - controller.enemyAnimation.gunMuzzle.position).magnitude;
+        if (controller.Aiming && (controller.enemyAnimation.currentAimingAngleGap < aimAngleGap || distance < controller.viewRadius))
         {
             if (controller.variables.startShootTimer >= startShootDelay)
             {
@@ -94,7 +94,7 @@ public class AttackAction : Action
     {
         if (Time.timeScale > 0 && controller.variables.shotTimer == 0f)
         {
-            controller.enemyAnimation.animator.SetTrigger(AnimatorKey.Shooting);
+            controller.enemyAnimation.anim.SetTrigger(AnimatorKey.Shooting);
             CastShot(controller);
         }
         else

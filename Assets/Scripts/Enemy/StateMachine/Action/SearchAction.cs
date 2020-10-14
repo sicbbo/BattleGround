@@ -9,7 +9,7 @@ public class SearchAction : Action
     {
         controller.focusSight = false;
         controller.enemyAnimation.AbortPendingAim();
-        controller.enemyAnimation.animator.SetBool(AnimatorKey.Crouch, false);
+        controller.enemyAnimation.anim.SetBool(AnimatorKey.Crouch, false);
         controller.CoverSpot = Vector3.positiveInfinity;
     }
 

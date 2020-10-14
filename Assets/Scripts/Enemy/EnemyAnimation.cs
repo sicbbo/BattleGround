@@ -7,7 +7,7 @@ using FC;
 
 public class EnemyAnimation : MonoBehaviour
 {
-    [HideInInspector] public Animator animator;
+    [HideInInspector] public Animator anim;
     [HideInInspector] public float currentAimingAngleGap;
     [HideInInspector] public Transform gunMuzzle;
     [HideInInspector] public float angularSpeed;
@@ -27,20 +27,20 @@ public class EnemyAnimation : MonoBehaviour
     {
         controller = GetComponent<StateController>();
         nav = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         nav.updateRotation = false;
 
-        hips = animator.GetBoneTransform(HumanBodyBones.Hips);
-        spine = animator.GetBoneTransform(HumanBodyBones.Spine);
+        hips = anim.GetBoneTransform(HumanBodyBones.Hips);
+        spine = anim.GetBoneTransform(HumanBodyBones.Spine);
 
         initialRootRotation = (hips.parent == transform) ? Vector3.zero : hips.parent.localEulerAngles;
         initialHipsRotation = hips.localEulerAngles;
         initialSpineRotation = spine.localEulerAngles;
 
-        animator.SetTrigger(AnimatorKey.ChangeWeapon);
-        animator.SetInteger(AnimatorKey.Weapon, (int)Enum.Parse(typeof(WeaponType), controller.ClassStats.WeaponType));
+        anim.SetTrigger(AnimatorKey.ChangeWeapon);
+        anim.SetInteger(AnimatorKey.Weapon, (int)Enum.Parse(typeof(WeaponType), controller.ClassStats.WeaponType));
 
-        foreach(Transform child in animator.GetBoneTransform(HumanBodyBones.RightHand))
+        foreach(Transform child in anim.GetBoneTransform(HumanBodyBones.RightHand))
         {
             gunMuzzle = child.Find("muzzle");
             if (gunMuzzle != null)
@@ -60,11 +60,11 @@ public class EnemyAnimation : MonoBehaviour
         angle *= Mathf.Deg2Rad;
         angularSpeed = angle / controller.generalStats.angleResponseTime;
 
-        animator.SetFloat(AnimatorKey.Speed, speed, controller.generalStats.speedDampTime, Time.deltaTime);
-        animator.SetFloat(AnimatorKey.AngularSpeed, angularSpeed, controller.generalStats.angularSpeedDampTime, Time.deltaTime);
+        anim.SetFloat(AnimatorKey.Speed, speed, controller.generalStats.speedDampTime, Time.deltaTime);
+        anim.SetFloat(AnimatorKey.AngularSpeed, angularSpeed, controller.generalStats.angularSpeedDampTime, Time.deltaTime);
 
-        animator.SetFloat(AnimatorKey.Horizontal, strafeDirection.x, controller.generalStats.speedDampTime, Time.deltaTime);
-        animator.SetFloat(AnimatorKey.Vertical, strafeDirection.z, controller.generalStats.speedDampTime, Time.deltaTime);
+        anim.SetFloat(AnimatorKey.Horizontal, strafeDirection.x, controller.generalStats.speedDampTime, Time.deltaTime);
+        anim.SetFloat(AnimatorKey.Vertical, strafeDirection.z, controller.generalStats.speedDampTime, Time.deltaTime);
 
     }
 
@@ -124,10 +124,10 @@ public class EnemyAnimation : MonoBehaviour
     {
         if (Time.timeScale > 0 && Time.deltaTime > 0)
         {
-            nav.velocity = animator.deltaPosition / Time.deltaTime;
+            nav.velocity = anim.deltaPosition / Time.deltaTime;
             if (!controller.Strafing)
             {
-                transform.rotation = animator.rootRotation;
+                transform.rotation = anim.rootRotation;
             }
         }
     }
@@ -173,7 +173,7 @@ public class EnemyAnimation : MonoBehaviour
         else
         {
             lastRotation = spine.rotation;
-            spine.rotation = Quaternion.Slerp(Quaternion.Euler(VectorHelper.ToVector(controller.ClassStats.AimOffset)), Quaternion.identity, timeCountGuard);
+            spine.rotation *= Quaternion.Slerp(Quaternion.Euler(VectorHelper.ToVector(controller.ClassStats.AimOffset)), Quaternion.identity, timeCountGuard);
             timeCountGuard += Time.deltaTime;
         }
     }

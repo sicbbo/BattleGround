@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e455237f0e6544e4b81b275f3bb782f4, type: 3}
+  m_Name: WaitState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 1d00d3a916c8fe746a791908b0839563, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 0939819c701bd3f43aee7f242e8cfbce, type: 2}
+    trueState: {fileID: 11400000, guid: 554278aa6638d0e438eccec5a16418c4, type: 2}
+    falseState: {fileID: 11400000, guid: 32ef2fa7be46f3040961b75681bd6367, type: 2}
+  - decision: {fileID: 11400000, guid: 70396e9c19c82b04aad1214db98c5bfd, type: 2}
+    trueState: {fileID: 11400000, guid: 32ef2fa7be46f3040961b75681bd6367, type: 2}
+    falseState: {fileID: 11400000, guid: 68cc51a14996b4546a659ba38d1dd784, type: 2}
+  sceneGizmoColor: {r: 0.501958, g: 0.754717, b: 0.7239894, a: 1}

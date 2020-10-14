@@ -16,6 +16,7 @@ public class AnimatorKey
     public const string Shooting = "Shooting";
     public const string Reload = "Reload";
     public const string Crouch = "Crouch";
+    public const string Hit = "Hit";
 
     public const string AngularSpeed = "AngularSpeed";
     public const string Horizontal = "H";
